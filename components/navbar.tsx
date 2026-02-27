@@ -67,7 +67,7 @@ export function Navbar() {
 
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center gap-4 shrink-0">
-          <div className="relative w-[82px] h-[82px] shrink-0">
+          <div className="relative w-[100px] h-[100px] shrink-0">
             <Image
               src={crest}
               alt="Escudo Club 17 de Agosto"

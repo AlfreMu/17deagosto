@@ -91,7 +91,7 @@ export default function ContactoPage() {
           </h2>
           <div className="mt-4 overflow-hidden rounded-xl border border-border">
             <iframe
-              src="https://www.google.com/maps?q=Av.%20Albarellos%202935%2C%20Villa%20Pueyrred%C3%B3n%2C%20CABA&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3285.0422899829937!2d-58.51317992367211!3d-34.577796472963534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb7ab112b71eb%3A0x98ed6bf139ffe7cd!2sClub%2017%20De%20Agosto!5e0!3m2!1ses!2sar!4v1772223387296!5m2!1ses!2sar"
               width="100%"
               height="360"
               style={{ border: 0 }}
