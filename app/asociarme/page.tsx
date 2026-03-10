@@ -90,17 +90,14 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 
   const form = e.currentTarget
   const data = new FormData(form)
-
-  // Pasamos FormData -> objeto
   const payload = Object.fromEntries(data.entries())
-
-  // Actividades seleccionadas (hoy las guardás en state)
-  const actividades = selectedActivities
 
   try {
     const res = await fetch("/api/asociarme", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         nombre: payload.nombre,
         dni: payload.dni,
@@ -109,20 +106,23 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         nacimiento: payload.nacimiento,
         direccion: payload.direccion,
         categoria: payload.categoria,
-        actividades,
+        actividades: selectedActivities,
         mensaje: payload.mensaje,
       }),
     })
 
-    if (res.ok) {
-      toast.success("¡Gracias! Te vamos a contactar en las próximas 24-48 hs hábiles.")
-      form.reset()
-      setSelectedActivities([])
-    } else {
-      const err = await res.json().catch(() => null)
-      toast.error(err?.error ?? "Hubo un error al enviar. Intentalo de nuevo.")
+    const result = await res.json()
+
+    if (!res.ok || !result.ok) {
+      throw new Error(result?.error ?? "Error al enviar el formulario")
     }
-  } catch {
+
+    toast.success(
+      "¡Gracias! Te vamos a contactar en las próximas 24-48 hs hábiles."
+    )
+    form.reset()
+    setSelectedActivities([])
+  } catch (error) {
     toast.error("Hubo un error al enviar. Intentalo de nuevo.")
   } finally {
     setLoading(false)
