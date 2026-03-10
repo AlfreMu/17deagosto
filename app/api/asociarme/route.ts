@@ -28,6 +28,12 @@ export async function POST(req: Request) {
     const to = process.env.CONTACT_TO_EMAIL
     const from = process.env.CONTACT_FROM_EMAIL
 
+    console.log("ENV CHECK", {
+      hasApiKey: !!apiKey,
+      to,
+      from,
+    })
+
     if (!apiKey) {
       return NextResponse.json(
         { ok: false, error: "Falta configurar RESEND_API_KEY." },
@@ -71,7 +77,7 @@ export async function POST(req: Request) {
       .filter(Boolean)
       .join("\n")
 
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from,
       to,
       replyTo: email,
@@ -79,9 +85,19 @@ export async function POST(req: Request) {
       text,
     })
 
-    return NextResponse.json({ ok: true })
+    if (error) {
+      console.error("RESEND ERROR:", error)
+      return NextResponse.json(
+        { ok: false, error: error.message || "Error de Resend." },
+        { status: 500 }
+      )
+    }
+
+    console.log("EMAIL SENT:", data)
+
+    return NextResponse.json({ ok: true, data })
   } catch (err) {
-    console.error(err)
+    console.error("ROUTE ERROR:", err)
     return NextResponse.json(
       { ok: false, error: "Error enviando email." },
       { status: 500 }

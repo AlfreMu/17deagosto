@@ -86,50 +86,53 @@ export default function AsociarmePage() {
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setLoading(true)
+  e.preventDefault()
+  setLoading(true)
 
-    const form = e.currentTarget
-    const data = new FormData(form)
-    const payload = Object.fromEntries(data.entries())
+  const form = e.currentTarget
+  const data = new FormData(form)
+  const payload = Object.fromEntries(data.entries())
 
-    try {
-      const res = await fetch("/api/asociarme", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nombre: payload.nombre,
-          dni: payload.dni,
-          email: payload.email,
-          telefono: payload.telefono,
-          nacimiento: payload.nacimiento,
-          direccion: payload.direccion,
-          categoria,
-          actividades: selectedActivities,
-          mensaje: payload.mensaje,
-        }),
-      })
+  try {
+    const res = await fetch("/api/asociarme", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: payload.nombre,
+        dni: payload.dni,
+        email: payload.email,
+        telefono: payload.telefono,
+        nacimiento: payload.nacimiento,
+        direccion: payload.direccion,
+        categoria,
+        actividades: selectedActivities,
+        mensaje: payload.mensaje,
+      }),
+    })
 
-      const result = await res.json()
+    const result = await res.json()
 
-      if (!res.ok || !result.ok) {
-        throw new Error(result?.error ?? "Error al enviar el formulario")
-      }
-
-      toast.success(
-        "¡Gracias! Te vamos a contactar en las próximas 24-48 hs hábiles."
-      )
-      form.reset()
-      setSelectedActivities([])
-      setCategoria("")
-    } catch (error) {
-      toast.error("Hubo un error al enviar. Intentalo de nuevo.")
-    } finally {
-      setLoading(false)
+    if (!res.ok || !result.ok) {
+      throw new Error(result?.error ?? "Error al enviar el formulario")
     }
+
+    toast.success(
+      "¡Gracias! Te vamos a contactar en las próximas 24-48 hs hábiles."
+    )
+    form.reset()
+    setSelectedActivities([])
+    setCategoria("")
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Hubo un error al enviar."
+    console.error("Error al enviar formulario:", error)
+    toast.error(message)
+  } finally {
+    setLoading(false)
   }
+}
 
   return (
     <>
