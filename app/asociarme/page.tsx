@@ -76,6 +76,7 @@ const categorias = [
 
 export default function AsociarmePage() {
   const [selectedActivities, setSelectedActivities] = useState<string[]>([])
+  const [categoria, setCategoria] = useState("")
   const [loading, setLoading] = useState(false)
 
   function toggleActivity(slug: string) {
@@ -84,54 +85,54 @@ export default function AsociarmePage() {
     )
   }
 
-async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault()
-  setLoading(true)
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setLoading(true)
 
-  const form = e.currentTarget
-  const data = new FormData(form)
-  const payload = Object.fromEntries(data.entries())
+    const form = e.currentTarget
+    const data = new FormData(form)
+    const payload = Object.fromEntries(data.entries())
 
-  try {
-    const res = await fetch("/api/asociarme", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        nombre: payload.nombre,
-        dni: payload.dni,
-        email: payload.email,
-        telefono: payload.telefono,
-        nacimiento: payload.nacimiento,
-        direccion: payload.direccion,
-        categoria: payload.categoria,
-        actividades: selectedActivities,
-        mensaje: payload.mensaje,
-      }),
-    })
+    try {
+      const res = await fetch("/api/asociarme", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre: payload.nombre,
+          dni: payload.dni,
+          email: payload.email,
+          telefono: payload.telefono,
+          nacimiento: payload.nacimiento,
+          direccion: payload.direccion,
+          categoria,
+          actividades: selectedActivities,
+          mensaje: payload.mensaje,
+        }),
+      })
 
-    const result = await res.json()
+      const result = await res.json()
 
-    if (!res.ok || !result.ok) {
-      throw new Error(result?.error ?? "Error al enviar el formulario")
+      if (!res.ok || !result.ok) {
+        throw new Error(result?.error ?? "Error al enviar el formulario")
+      }
+
+      toast.success(
+        "¡Gracias! Te vamos a contactar en las próximas 24-48 hs hábiles."
+      )
+      form.reset()
+      setSelectedActivities([])
+      setCategoria("")
+    } catch (error) {
+      toast.error("Hubo un error al enviar. Intentalo de nuevo.")
+    } finally {
+      setLoading(false)
     }
-
-    toast.success(
-      "¡Gracias! Te vamos a contactar en las próximas 24-48 hs hábiles."
-    )
-    form.reset()
-    setSelectedActivities([])
-  } catch (error) {
-    toast.error("Hubo un error al enviar. Intentalo de nuevo.")
-  } finally {
-    setLoading(false)
   }
-}
 
   return (
     <>
-      {/* Hero */}
       <section className="bg-[var(--navy)] py-14 px-4">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="font-heading text-3xl font-extrabold text-white sm:text-4xl">
@@ -153,8 +154,6 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
       </section>
 
       <div className="mx-auto max-w-5xl px-4 py-12 lg:px-6">
-
-        {/* Steps */}
         <section className="mb-12">
           <h2 className="text-center font-heading text-xl font-bold text-foreground sm:text-2xl">
             Como es el proceso
@@ -182,7 +181,6 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           </div>
         </section>
 
-        {/* Requisitos */}
         <section className="mb-12">
           <h2 className="font-heading text-xl font-bold text-foreground">
             Requisitos
@@ -200,7 +198,6 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           </div>
         </section>
 
-        {/* Categorias */}
         <section className="mb-12">
           <h2 className="font-heading text-xl font-bold text-foreground">
             Categorias
@@ -220,7 +217,6 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           </div>
         </section>
 
-        {/* Aranceles */}
         <section className="mb-12 rounded-xl bg-secondary p-6">
           <h2 className="font-heading text-xl font-bold text-foreground">
             Aranceles
@@ -257,7 +253,6 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           </div>
         </section>
 
-        {/* Medios de pago */}
         <section className="mb-12">
           <h2 className="font-heading text-xl font-bold text-foreground">
             Medios de pago
@@ -279,7 +274,6 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           </div>
         </section>
 
-        {/* Formulario */}
         <section id="formulario" className="scroll-mt-24">
           <h2 className="font-heading text-xl font-bold text-foreground">
             Formulario de inscripcion
@@ -289,38 +283,68 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
             className="mt-4 grid gap-4 rounded-xl border border-border bg-card p-5 shadow-sm sm:grid-cols-2"
           >
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="nombre" className="text-sm text-foreground">Nombre y apellido</Label>
+              <Label htmlFor="nombre" className="text-sm text-foreground">
+                Nombre y apellido
+              </Label>
               <Input id="nombre" name="nombre" required placeholder="Juan Perez" />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="dni" className="text-sm text-foreground">DNI</Label>
+              <Label htmlFor="dni" className="text-sm text-foreground">
+                DNI
+              </Label>
               <Input id="dni" name="dni" required placeholder="12345678" />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="email" className="text-sm text-foreground">Email</Label>
-              <Input id="email" name="email" type="email" required placeholder="juan@email.com" />
+              <Label htmlFor="email" className="text-sm text-foreground">
+                Email
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="juan@email.com"
+              />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="telefono" className="text-sm text-foreground">Telefono</Label>
-              <Input id="telefono" name="telefono" required placeholder="11-1234-5678" />
+              <Label htmlFor="telefono" className="text-sm text-foreground">
+                Telefono
+              </Label>
+              <Input
+                id="telefono"
+                name="telefono"
+                required
+                placeholder="11-1234-5678"
+              />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="nacimiento" className="text-sm text-foreground">Fecha de nacimiento</Label>
+              <Label htmlFor="nacimiento" className="text-sm text-foreground">
+                Fecha de nacimiento
+              </Label>
               <Input id="nacimiento" name="nacimiento" type="date" required />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="direccion" className="text-sm text-foreground">Direccion</Label>
-              <Input id="direccion" name="direccion" required placeholder="Calle 123, CABA" />
+              <Label htmlFor="direccion" className="text-sm text-foreground">
+                Direccion
+              </Label>
+              <Input
+                id="direccion"
+                name="direccion"
+                required
+                placeholder="Calle 123, CABA"
+              />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="categoria" className="text-sm text-foreground">Categoria</Label>
-              <Select name="categoria" required>
+              <Label htmlFor="categoria" className="text-sm text-foreground">
+                Categoria
+              </Label>
+              <Select value={categoria} onValueChange={setCategoria} required>
                 <SelectTrigger id="categoria">
                   <SelectValue placeholder="Selecciona una categoria" />
                 </SelectTrigger>
@@ -351,7 +375,9 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
             </div>
 
             <div className="flex flex-col gap-1.5 sm:col-span-2">
-              <Label htmlFor="mensaje" className="text-sm text-foreground">Mensaje (opcional)</Label>
+              <Label htmlFor="mensaje" className="text-sm text-foreground">
+                Mensaje (opcional)
+              </Label>
               <Textarea
                 id="mensaje"
                 name="mensaje"
@@ -373,7 +399,6 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
             </div>
           </form>
         </section>
-
       </div>
     </>
   )

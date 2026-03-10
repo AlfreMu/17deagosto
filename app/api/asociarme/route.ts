@@ -1,8 +1,6 @@
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(req: Request) {
   try {
     const body = await req.json()
@@ -26,8 +24,16 @@ export async function POST(req: Request) {
       )
     }
 
+    const apiKey = process.env.RESEND_API_KEY
     const to = process.env.CONTACT_TO_EMAIL
     const from = process.env.CONTACT_FROM_EMAIL
+
+    if (!apiKey) {
+      return NextResponse.json(
+        { ok: false, error: "Falta configurar RESEND_API_KEY." },
+        { status: 500 }
+      )
+    }
 
     if (!to || !from) {
       return NextResponse.json(
@@ -38,6 +44,8 @@ export async function POST(req: Request) {
         { status: 500 }
       )
     }
+
+    const resend = new Resend(apiKey)
 
     const actividadesText = Array.isArray(actividades)
       ? actividades.join(", ")
