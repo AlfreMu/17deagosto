@@ -84,36 +84,50 @@ export default function AsociarmePage() {
     )
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setLoading(true)
+async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault()
+  setLoading(true)
 
-    const form = e.currentTarget
-    const data = new FormData(form)
+  const form = e.currentTarget
+  const data = new FormData(form)
 
-    // Agregamos las actividades seleccionadas como campo de texto
-    data.append("actividades", selectedActivities.join(", "))
+  // Pasamos FormData -> objeto
+  const payload = Object.fromEntries(data.entries())
 
-    try {
-      const res = await fetch("https://formspree.io/f/xnjboloj", {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      })
+  // Actividades seleccionadas (hoy las guardás en state)
+  const actividades = selectedActivities
 
-      if (res.ok) {
-        toast.success("Gracias! Te vamos a contactar en las proximas 24-48 hs habiles.")
-        form.reset()
-        setSelectedActivities([])
-      } else {
-        toast.error("Hubo un error al enviar. Intentalo de nuevo.")
-      }
-    } catch {
-      toast.error("Hubo un error al enviar. Intentalo de nuevo.")
-    } finally {
-      setLoading(false)
+  try {
+    const res = await fetch("/api/asociarme", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre: payload.nombre,
+        dni: payload.dni,
+        email: payload.email,
+        telefono: payload.telefono,
+        nacimiento: payload.nacimiento,
+        direccion: payload.direccion,
+        categoria: payload.categoria,
+        actividades,
+        mensaje: payload.mensaje,
+      }),
+    })
+
+    if (res.ok) {
+      toast.success("¡Gracias! Te vamos a contactar en las próximas 24-48 hs hábiles.")
+      form.reset()
+      setSelectedActivities([])
+    } else {
+      const err = await res.json().catch(() => null)
+      toast.error(err?.error ?? "Hubo un error al enviar. Intentalo de nuevo.")
     }
+  } catch {
+    toast.error("Hubo un error al enviar. Intentalo de nuevo.")
+  } finally {
+    setLoading(false)
   }
+}
 
   return (
     <>
