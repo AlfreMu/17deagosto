@@ -1,37 +1,67 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 
 export function CtaBanner() {
   return (
-    <section className="relative bg-[var(--navy)] py-10 md:py-14">
-      {/* fondo con gradiente sutil */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
+    <section 
+      className="relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(to bottom right, #1a3a6b, #1a3a6b, #162682)',
+        paddingTop: 'clamp(2.5rem, 6vw, 4rem)',
+        paddingBottom: 'clamp(2.5rem, 6vw, 4rem)',
+      }}
+    >
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+          backgroundSize: '32px 32px'
+        }} />
+      </div>
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="rounded-3xl bg-white/10 p-6 md:p-10 backdrop-blur-sm border border-white/10">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h3 className="font-heading text-2xl md:text-4xl font-extrabold uppercase tracking-wider text-white">
-                ASOCIATE HOY
-              </h3>
-              <p className="mt-2 text-sm md:text-base text-white/85 max-w-2xl">
-                Comenzá ahora mismo el trámite para asociarte y ser parte del Club 17 de Agosto.
-              </p>
-            </div>
+      <div className="relative container-club">
+        <div className="text-center max-w-3xl mx-auto">
+          {/* Small label */}
+          <p className="text-xs md:text-sm uppercase tracking-wider font-semibold text-white/80 mb-4">
+            Unite al club
+          </p>
 
+          {/* Title - Sentence case, Outfit */}
+          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-5 tracking-tight leading-tight">
+            Sumate a nuestra comunidad
+          </h2>
+          
+          {/* Subtitle */}
+          <p className="text-base md:text-lg text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto">
+            Comenzá ahora mismo el trámite para asociarte y ser parte del Club 17 de Agosto.
+          </p>
+
+          {/* CTA Button - Enhanced with icon */}
+          <Link href="/asociarme">
             <Button
-              asChild
+              size="lg"
               className="
-                h-12 md:h-14 px-8 md:px-10 rounded-xl
-                bg-[var(--celeste)] text-white hover:bg-[var(--blue)]
-                font-semibold uppercase tracking-wide
-                shadow-sm transition-all duration-200
-                hover:shadow-md hover:-translate-y-[1px]
+                h-16 px-12 rounded-xl
+                bg-white
+                border-3 border-white
+                font-bold text-lg
+                transition-all duration-300
+                shadow-2xl hover:shadow-[0_20px_60px_rgba(255,255,255,0.3)]
+                hover:scale-105 hover:bg-neutral-50
+                inline-flex items-center gap-3
               "
+              style={{ color: '#1a3a6b' }}
             >
-              <Link href="/asociarme">QUIERO ASOCIARME</Link>
+              Quiero asociarme
+              <ArrowRight className="size-5" />
             </Button>
-          </div>
+          </Link>
+
+          {/* Trust indicator */}
+          <p className="mt-8 text-sm text-white/70">
+            Más de 2000 socios activos confían en nosotros
+          </p>
         </div>
       </div>
     </section>

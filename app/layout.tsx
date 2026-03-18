@@ -1,13 +1,29 @@
 import type { Metadata, Viewport } from "next"
-import { Inter, Montserrat } from "next/font/google"
+import { Inter, Outfit, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "sonner"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { MobileStickyCta } from "@/components/mobile-sticky-cta"
 import "./globals.css"
 
-const _inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"] })
-const _montserrat = Montserrat({ subsets: ["latin"], weight: ["600", "700", "800"] })
+const inter = Inter({ 
+  subsets: ["latin"], 
+  weight: ["400", "500", "600"],
+  variable: "--font-inter"
+})
+
+const outfit = Outfit({ 
+  subsets: ["latin"], 
+  weight: ["600", "700"],
+  variable: "--font-outfit"
+})
+
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ["latin"], 
+  weight: ["600", "700"],
+  variable: "--font-space-grotesk"
+})
 
 export const metadata: Metadata = {
   title: {
@@ -28,11 +44,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es">
-      <body className="font-sans antialiased">
+    <html lang="es" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable}`}>
+      <body className="font-sans antialiased pb-20 md:pb-0">
         <Navbar />
         <main className="pt-[110px]">{children}</main>
         <Footer />
+        <MobileStickyCta />
         <Toaster position="top-center" richColors />
         <Analytics />
       </body>
