@@ -111,7 +111,7 @@ function ActivityCard({
           src={card.image}
           alt={card.name}
           fill
-          sizes={isLarge ? "50vw" : "30vw"}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover object-center"
         />
       </motion.div>

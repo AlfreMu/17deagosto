@@ -44,6 +44,7 @@ export function HeroSection() {
           alt="Fútsal en el Club 17 de Agosto"
           fill
           priority
+          sizes="100vw"
           className="object-cover object-center"
         />
       </motion.div>

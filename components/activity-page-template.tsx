@@ -58,6 +58,7 @@ export function ActivityPageTemplate({
           src={activity.image}
           alt={activity.name}
           fill
+          sizes="100vw"
           className="object-cover"
           priority
         />
@@ -305,6 +306,7 @@ export function ActivityPageTemplate({
                     src={img}
                     alt={`${activity.name} galeria ${i + 1}`}
                     fill
+                    sizes={i === 0 ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 50vw, 33vw"}
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/10 transition-opacity group-hover:opacity-0" />
