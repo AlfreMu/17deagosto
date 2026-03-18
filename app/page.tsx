@@ -1,13 +1,15 @@
-import { HeroCarousel } from "@/components/hero-carousel"
-import { ActivitiesRow } from "@/components/activities-row"
+import { HeroSection } from "@/components/hero-section"
+import { ActivitiesGrid } from "@/components/activities-grid"
 import { CtaBanner } from "@/components/cta-banner"
 
 export default function HomePage() {
   return (
     <>
-      <HeroCarousel />
-      <ActivitiesRow />
+      <HeroSection />
+      <ActivitiesGrid />
       <CtaBanner />
     </>
   )
 }
+
+

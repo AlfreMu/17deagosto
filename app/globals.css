@@ -4,9 +4,125 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* ============================================
+     LEGACY TOKENS (preserved for compatibility)
+     ============================================ */
   --navy: #0a1628;
   --blue: #1a3a6b;
   --celeste: #2563eb;
+  --titulo: #162682;
+
+  /* ============================================
+     ACCENT — ROSA SUAVE (acento moderno)
+     ============================================ */
+  --club-pink: #f472b6;
+  --club-pink-hover: #ec4899;
+  --club-pink-light: #fce7f3;
+
+  /* ============================================
+     DARK SURFACE (hero oscuro)
+     ============================================ */
+  --surface-dark: #0a0f1e;
+  --surface-dark-card: #111827;
+
+  /* ============================================
+     CLUB BLUE SCALE (institutional identity)
+     ============================================ */
+  --club-blue-900: #0a1628;
+  --club-blue-800: #162682;
+  --club-blue-700: #1a3a6b;
+  --club-blue-600: #2563eb;
+  --club-blue-500: #3b82f6;
+  --club-blue-400: #60a5fa;
+  --club-blue-300: #93c5fd;
+
+  /* ============================================
+     NEUTRAL SCALE (backgrounds, text, borders)
+     ============================================ */
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+  --neutral-white: #ffffff;
+
+  /* ============================================
+     SPACING TOKENS (base 8px system)
+     ============================================ */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 1rem;      /* 16px */
+  --space-md: 1.5rem;    /* 24px */
+  --space-lg: 2rem;      /* 32px */
+  --space-xl: 3rem;      /* 48px */
+  --space-2xl: 4rem;     /* 64px */
+  --space-3xl: 6rem;     /* 96px */
+  --space-4xl: 8rem;     /* 128px */
+  --space-5xl: 10rem;    /* 160px */
+  --space-6xl: 12rem;    /* 192px */
+
+  /* ============================================
+     RADIUS TOKENS (Direction 3: 16px primary)
+     ============================================ */
+  --radius-sm: 0.5rem;   /* 8px */
+  --radius-md: 0.75rem;  /* 12px */
+  --radius-lg: 1rem;     /* 16px - primary */
+  --radius-xl: 1.5rem;   /* 24px */
+
+  /* ============================================
+     SHADOW TOKENS (subtle elevation)
+     ============================================ */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 8px rgba(26, 58, 107, 0.08);
+  --shadow-lg: 0 8px 16px rgba(26, 58, 107, 0.08);
+  --shadow-xl: 0 12px 24px rgba(26, 58, 107, 0.12);
+
+  /* ============================================
+     FOCUS RING TOKEN (accessibility)
+     ============================================ */
+  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.3);
+
+  /* ============================================
+     SEMANTIC TOKENS - SURFACES
+     ============================================ */
+  --surface-primary: var(--neutral-white);
+  --surface-secondary: var(--neutral-50);
+  --surface-elevated: var(--neutral-white);
+  --surface-overlay: rgba(0, 0, 0, 0.3);
+
+  /* ============================================
+     SEMANTIC TOKENS - TEXT
+     ============================================ */
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-700);
+  --text-muted: var(--neutral-600);
+  --text-inverse: var(--neutral-white);
+
+  /* ============================================
+     SEMANTIC TOKENS - BORDERS
+     ============================================ */
+  --border-subtle: var(--neutral-100);
+  --border-default: var(--neutral-200);
+  --border-strong: var(--neutral-300);
+  --border-interactive: var(--club-blue-600);
+
+  /* ============================================
+     SEMANTIC TOKENS - ACTIONS
+     ============================================ */
+  --action-primary: var(--club-blue-700);
+  --action-primary-hover: var(--club-blue-800);
+  --action-primary-active: var(--club-blue-900);
+  --action-secondary: var(--neutral-100);
+  --action-secondary-hover: var(--neutral-200);
+
+  /* ============================================
+     SHADCN/UI TOKENS (preserved for compatibility)
+     ============================================ */
   --background: #ffffff;
   --foreground: #0f172a;
   --card: #ffffff;
@@ -40,15 +156,48 @@
   --sidebar-accent-foreground: #1a3a6b;
   --sidebar-border: #e2e8f0;
   --sidebar-ring: #2563eb;
-  --titulo: #162682;
 
+  /* ============================================
+     TYPOGRAPHY TOKENS (Direction 3)
+     ============================================ */
+  
+  /* Font Size Scale */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2rem;        /* 32px */
+  --text-5xl: 2.5rem;      /* 40px */
+  --text-6xl: 3rem;        /* 48px */
 
+  /* Line Height Scale */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+  --leading-loose: 1.75;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.1em;
+
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
 }
 
 @theme inline {
-  --font-sans: 'Inter', 'Inter Fallback', sans-serif;
-  --font-heading: 'Montserrat', 'Montserrat Fallback', sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --font-sans: var(--font-inter), 'Inter', 'Inter Fallback', sans-serif;
+  --font-heading: var(--font-outfit), 'Outfit', 'Outfit Fallback', sans-serif;
+  --font-mono: var(--font-space-grotesk), 'Space Grotesk', 'Space Grotesk Fallback', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -93,5 +242,216 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Typography Hierarchy - Direction 3: Club Contemporáneo Limpio */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-bold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    color: var(--text-primary);
+  }
+
+  h1 {
+    font-size: var(--text-4xl);
+    line-height: var(--leading-tight);
+  }
+
+  h2 {
+    font-size: var(--text-3xl);
+    line-height: var(--leading-snug);
+  }
+
+  h3 {
+    font-size: var(--text-2xl);
+    line-height: var(--leading-snug);
+  }
+
+  h4 {
+    font-size: var(--text-xl);
+    line-height: var(--leading-normal);
+  }
+
+  h5 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-normal);
+  }
+
+  h6 {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-normal);
+  }
+
+  /* Responsive Typography - Mobile First */
+  @media (min-width: 768px) {
+    h1 {
+      font-size: var(--text-6xl);
+    }
+
+    h2 {
+      font-size: var(--text-5xl);
+    }
+
+    h3 {
+      font-size: var(--text-4xl);
+    }
+
+    h4 {
+      font-size: var(--text-2xl);
+    }
+
+    h5 {
+      font-size: var(--text-xl);
+    }
+
+    h6 {
+      font-size: var(--text-lg);
+    }
+  }
+
+  /* Paragraph and Text Defaults */
+  p {
+    line-height: var(--leading-relaxed);
+    color: var(--text-primary);
+  }
+
+  small {
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+  }
+
+  /* Labels and Stats - Space Grotesk */
+  .label,
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--club-blue-600);
+  }
+
+  .stat-number {
+    font-family: var(--font-mono);
+    font-weight: var(--font-bold);
+    letter-spacing: var(--tracking-tighter);
+  }
+
+  /* ============================================
+     SPACING & LAYOUT FOUNDATIONS (Direction 3)
+     ============================================ */
+
+  /* Container System - Consistent max-width and padding */
+  .container-club {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;  /* 24px mobile */
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-club {
+      padding-left: 2rem;  /* 32px desktop */
+      padding-right: 2rem;
+    }
+  }
+
+  /* Section Spacing - Vertical rhythm between major sections */
+  .section-spacing {
+    padding-top: var(--space-2xl);     /* 64px mobile */
+    padding-bottom: var(--space-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .section-spacing {
+      padding-top: var(--space-4xl);   /* 128px desktop */
+      padding-bottom: var(--space-4xl);
+    }
+  }
+
+  /* Section Spacing Variants */
+  .section-spacing-sm {
+    padding-top: var(--space-xl);      /* 48px mobile */
+    padding-bottom: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .section-spacing-sm {
+      padding-top: var(--space-3xl);   /* 96px desktop */
+      padding-bottom: var(--space-3xl);
+    }
+  }
+
+  .section-spacing-lg {
+    padding-top: var(--space-3xl);     /* 96px mobile */
+    padding-bottom: var(--space-3xl);
+  }
+
+  @media (min-width: 768px) {
+    .section-spacing-lg {
+      padding-top: var(--space-5xl);   /* 160px desktop */
+      padding-bottom: var(--space-5xl);
+    }
+  }
+
+  /* Content Spacing - Internal section spacing */
+  .content-spacing {
+    margin-top: var(--space-lg);       /* 32px */
+  }
+
+  .content-spacing-sm {
+    margin-top: var(--space-md);       /* 24px */
+  }
+
+  .content-spacing-lg {
+    margin-top: var(--space-xl);       /* 48px */
+  }
+
+  /* Grid Gaps - Consistent spacing for card grids */
+  .grid-gap-club {
+    gap: var(--space-md);              /* 24px mobile */
+  }
+
+  @media (min-width: 768px) {
+    .grid-gap-club {
+      gap: var(--space-lg);            /* 32px desktop */
+    }
+  }
+
+  /* ============================================
+     CARD SYSTEM (Direction 3)
+     ============================================ */
+
+  /* Base Card - Minimalista */
+  .card-club {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);   /* 16px */
+    padding: var(--space-lg);          /* 32px */
+    transition: all 0.25s ease;
+  }
+
+  /* Card Hover - Blue border + subtle shadow */
+  .card-club:hover {
+    border-color: var(--club-blue-600);
+    border-width: 2px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Card Flat - No shadow variant */
+  .card-club-flat {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: none;
+    transition: all 0.25s ease;
   }
 }
