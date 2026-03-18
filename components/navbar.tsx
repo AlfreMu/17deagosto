@@ -187,7 +187,7 @@ export function Navbar() {
               className="h-11 px-6 rounded-full font-bold text-xs tracking-widest shadow-[0_4px_14px_rgba(244,114,182,0.4)] transition-all hover:scale-105"
               style={{ backgroundColor: 'var(--club-pink)', color: 'var(--club-blue-700)' }}
             >
-              ALTA SOCIO
+              QUIERO SER SOCIO
             </Button>
           </Link>
         </nav>
